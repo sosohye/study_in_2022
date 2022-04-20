@@ -8,7 +8,7 @@ typedef struct StackNode{
 
 int isEmpty(StackNode* top)
 {
-    return top == NULL; 
+    return top == NULL ? 1 : 0; 
 }
 
 void showLinkedStack(StackNode* top)
@@ -35,7 +35,7 @@ void pushLinkedStack(StackNode** top, int dataX)
     StackNode* pNode = (StackNode*)malloc(sizeof(StackNode));
     pNode->data = dataX;
     
-    if(isEmpty(top))    *top = pNode
+    if(isEmpty(*(top))) *(top) = pNode;
     
     else
     {
@@ -46,7 +46,7 @@ void pushLinkedStack(StackNode** top, int dataX)
 
 StackNode* popLinkedStack(StackNode** top)
 {
-    if(isEmpty(top))
+    if(isEmpty(*(top)))
     {
         printf("The Stack is Empty!\n");
         return;
@@ -54,7 +54,7 @@ StackNode* popLinkedStack(StackNode** top)
     
     StackNode* pNode = *(top); 
     *(top) = (*(top))->next;
-    return pNode
+    return pNode;
 }
 
 StackNode* topLinkedStack(StackNode* top)
