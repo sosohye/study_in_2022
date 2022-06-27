@@ -3,20 +3,18 @@ using namespace std;
 int card[1009];
 int DP[1009][1009][2] = {0,};
 
-int choice(int start, int last, bool knwoo){
-	int &ret = DP[start][last][knwoo];
+int choice(int start, int last, bool kw){
+	int &ret = DP[start][last][kw];
 	if(ret != -1) return ret;
 	
 	if(start == last){
-		if(knwoo)
+		if(kw)
 			return ret = card[start];
 		else
 			return ret = 0;
 	}
-	// 근우 차례에서는 왼쪽, 오른쪽 중 하나 '취하고' 게임 진행 했을 때 '최대'값.
-	if(knwoo)
+	if(kw)
 		return 	ret = max(choice(start+1,last,false)+card[start],choice(start,last-1,false)+card[last]);
-	// 명우 차례에서는 왼쪽, 오른쪽 중 하나를 '없애고' 게임 진행 했을 때 '최소'값
 	else
 		return ret = min(choice(start+1,last,true),choice(start,last-1,true));
 }
